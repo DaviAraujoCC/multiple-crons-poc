@@ -15,5 +15,3 @@ spec:
             envFrom:
             - configMapRef:
                 name: cronjobD-env
-            - secretRef:
-                name: cronjobD-secret
