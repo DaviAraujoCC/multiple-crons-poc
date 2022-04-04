@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../model
+
+configMapGenerator:
+- name: cronjobD-env
+  namespace: default
+  envs: [cronjobD.env]
+  behavior: create
+  options:
+    disableNameSuffixHash: true
+
+patchesStrategicMerge:
+  - cronjobD.yaml
+
+patches:
+- target:
+    kind: CronJob
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: cronjobD
+    - op: replace
+      path: /spec/jobTemplate/spec/template/spec/containers/0/name
+      value: cronjobD
