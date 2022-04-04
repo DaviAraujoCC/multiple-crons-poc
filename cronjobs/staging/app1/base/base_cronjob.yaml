@@ -1,0 +1,30 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: base
+  namespace: default
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - jobs
+          restartPolicy: OnFailure
+          tolerations:
+          - effect: NoSchedule
+            key: app
+            operator: Equal
+            value: jobs        
+          containers:
+          - name: base
+            imagePullPolicy: Always
