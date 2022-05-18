@@ -4,10 +4,10 @@ resources:
 - ../base
 
 configMapGenerator:
-- name: cronjobA-env
+- name: cronjobA-cron-env
   namespace: default
   envs: [cronjobA.env]
-  behavior: create
+  behavior: merge
   options:
     disableNameSuffixHash: true
 
