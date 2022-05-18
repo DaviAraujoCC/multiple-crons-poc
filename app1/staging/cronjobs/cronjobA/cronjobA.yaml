@@ -14,4 +14,4 @@ spec:
             image: gcr.io/hu-cloud-189316/busybox
             envFrom:
             - configMapRef:
-                name: cronjobD-env
+                name: cronjobA-env

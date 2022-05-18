@@ -4,15 +4,15 @@ resources:
 - ../base
 
 configMapGenerator:
-- name: cronjobA-cron-env
+- name: cronjobX-cron-env
   namespace: default
-  envs: [cronjobA.env]
+  envs: [cronjobX.env]
   behavior: merge
   options:
     disableNameSuffixHash: true
 
 patchesStrategicMerge:
-  - cronjobA.yaml
+  - cronjobX.yaml
 
 patches:
 - target:
@@ -20,7 +20,7 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: cronjobA
+      value: cronjobX
     - op: replace
       path: /spec/jobTemplate/spec/template/spec/containers/0/name
-      value: cronjobA
+      value: cronjobX
